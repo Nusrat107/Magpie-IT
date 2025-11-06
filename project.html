@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Magpie IT — Dashboard & Profile</title>
+
+  <!-- Fonts + Bootstrap + Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- AOS for scroll animations -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <style>
+
+
+    .portfolio-card {
+  background: #1a1a1a;
+  border: 1px solid #6C63FF;
+  border-radius: 12px;
+  transition: all 0.4s ease;
+  box-shadow: 0 0 12px rgba(108, 99, 255, 0.2);
+}
+
+.portfolio-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 22px rgba(108, 99, 255, 0.5);
+}
+
+.portfolio-img {
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.portfolio-card:hover .portfolio-img {
+  transform: scale(1.03);
+}
+
+.badges .badge {
+  margin-right: 5px;
+}
+
+.btn-outline-info:hover {
+  background-color: #6C63FF;
+  color: #fff;
+  border-color: #6C63FF;
+  transition: 0.3s;
+}
+
+.btn-outline-danger:hover {
+  background-color: #4641B3;
+  border-color: #4641B3;
+  color: #fff;
+}
+
+.card-dark {
+      background-color: #151a24;
+      border: 2px solid #6C63FF;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(108,99,255,0.2);
+    }
+
+    .btn-custom {
+      background-color: #6C63FF;
+      color: #fff;
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-custom:hover {
+      background-color: #4641B3;
+    }
+
+    .table-dark th {
+      background-color: #20232d;
+      color: #6C63FF;
+    }
+
+    .modal-content {
+      background-color: #151a24;
+      border: 2px solid #6C63FF;
+      border-radius: 10px;
+      color: #fff;
+      transition: 0.3s ease-in-out;
+    }
+
+    .form-control, .form-select {
+      background-color: #0F1A2A;
+      color: #fff;
+      border: 1px solid #4641B3;
+    }
+
+    .form-control:focus {
+      border-color: #6C63FF;
+      box-shadow: 0 0 6px rgba(108,99,255,0.3);
+    }
+
+    .modal-header {
+      border-bottom: 2px solid #6C63FF;
+    }
+
+
+  :root{
+    --bg:#0b1220;
+    --panel:#0f1a2a;
+    --muted:#a6b0c3;
+    --accent:#6C63FF;
+    --accent2:#4641B3;
+    --glass:rgba(255,255,255,0.03);
+  }
+
+  /* Portfolio Card Custom Size */
+.portfolio-card {
+    max-width: 300px; /* width কমানো */
+    padding: 15px;    /* padding কমানো */
+    margin: auto;     /* center alignment */
+    height: auto;     /* auto height */
+    transition: all 0.3s ease;
+}
+
+.portfolio-card img.portfolio-img {
+    height: 150px;   /* image height কমানো */
+    object-fit: cover;
+}
+
+  body{
+    margin:0;
+    font-family:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: var(--bg);
+    color:#e6eef8;
+  }
+
+  /* ===== Buttons ===== */
+  .btn-custom {
+    background: var(--accent);
+    color:#fff;
+    border:none;
+    border-radius:10px;
+    padding:8px 20px;
+    font-weight:500;
+    transition: all 0.3s ease;
+  }
+  .btn-custom:hover{
+    background: var(--accent2);
+    box-shadow:0 6px 18px rgba(108,99,255,0.3);
+  }
+  .btn-outline-secondary, .btn-outline-warning, .btn-outline-danger{
+    transition: all 0.3s ease;
+  }
+  .btn-outline-secondary:hover, .btn-outline-warning:hover, .btn-outline-danger:hover{
+    color:#fff;
+    box-shadow:0 6px 18px rgba(108,99,255,0.3);
+  }
+
+  /* ===== Card ===== */
+  .card-dark {
+    background-color: var(--panel);
+    border: 2px solid var(--accent);
+    border-radius:12px;
+    padding:20px;
+    box-shadow: 0 8px 25px rgba(108,99,255,0.4);
+    transition: all 0.3s ease;
+  }
+  .card-dark:hover {
+    box-shadow: 0 12px 30px rgba(108,99,255,0.5);
+    border-color: var(--accent2);
+  }
+
+  /* ===== Table ===== */
+  .table-dark {
+    background-color: var(--panel);
+    color:#e6eef8;
+  }
+  .table-dark th, .table-dark td {
+    border-color: rgba(108,99,255,0.2);
+    vertical-align: middle;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  .table-dark tr:hover {
+    background: rgba(108,99,255,0.05);
+  }
+
+  /* ===== Form Inputs ===== */
+  .form-control, .form-select {
+    background-color: #0F1A2A;
+    color: #fff;
+    border: 1px solid #4641B3;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  .form-control:focus, .form-select:focus {
+    border-color: var(--accent);
+    box-shadow:0 0 8px rgba(108,99,255,0.3);
+  }
+
+  /* ===== Modal ===== */
+  .modal-content {
+    background-color: var(--panel);
+    border:2px solid var(--accent);
+    border-radius:12px;
+    color:#fff;
+    box-shadow:0 8px 25px rgba(108,99,255,0.4);
+    transition: all 0.3s ease;
+  }
+  .modal-content:hover {
+    box-shadow:0 12px 30px rgba(108,99,255,0.5);
+  }
+  .modal-header, .modal-footer{
+    border-color: var(--accent);
+  }
+  .btn-close-white {
+    filter: invert(1);
+  }
+
+  /* ===== Images ===== */
+  .table img, .card img {
+    border-radius:50%;
+    object-fit:cover;
+    transition: all 0.3s ease;
+  }
+  .table img:hover, .card img:hover {
+    transform: scale(1.05);
+    box-shadow:0 6px 18px rgba(108,99,255,0.3);
+  }
+
+  /* ===== Headings ===== */
+  h3.fw-bold {
+    color: var(--accent);
+  }
+  label {
+    font-weight:500;
+    color: #e6eef8;
+  }
+
+  /* ===== Small Links ===== */
+  small a {
+    color: var(--accent);
+    text-decoration:underline;
+    transition: 0.3s;
+  }
+  small a:hover {
+    color: var(--accent2);
+  }
+
+  /* ===== Scrollbar ===== */
+  .modal-body {
+    max-height:70vh;
+    overflow-y:auto;
+  }
+
+    :root{
+      --bg:#0b1220;
+      --panel:#0f1a2a;
+      --muted:#a6b0c3;
+      --accent:#6C63FF;
+      --accent2:#4641B3;
+      --glass:rgba(255,255,255,0.03);
+    }
+
+    body{
+      margin:0;
+      font-family:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:#081028;
+      color:#e6eef8;
+      display:flex;
+      min-height:100vh;
+    }
+    a{text-decoration:none;color:inherit;}
+    .muted { color:var(--muted); font-size:13px; }
+
+    /* Sidebar */
+    .sidebar{
+      width:260px;
+      background-color:#081028;
+      border-right:1px solid rgba(255,255,255,0.03);
+      display:flex;
+      flex-direction:column;
+      padding:28px 20px;
+      gap:18px;
+      position:fixed;
+      top:0; left:0; bottom:0;
+      z-index:1000;
+    }
+    .brand{ display:flex; align-items:center; gap:10px; margin-bottom:20px; }
+    .brand-logo{ width:40px; height:40px; border-radius:50%; object-fit:cover; }
+    .brand h4{ margin:0; color:#fff; font-weight:700; }
+    .menu{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:6px; }
+    .menu a{
+      display:flex; align-items:center; gap:12px;
+      padding:10px 12px; border-radius:8px;
+      color:rgba(255,255,255,0.6); font-weight:500;
+    }
+    .menu a.active{
+      color:var(--accent);
+      background:linear-gradient(90deg, rgba(108,99,255,0.12), rgba(70,65,179,0.06));
+    }
+    .menu a:hover{ color:var(--accent); background:rgba(108,99,255,0.03); }
+    .cta-get{
+      margin-top:auto; padding:10px; font-weight:600;
+      border:none; border-radius:10px;
+      color:#fff; background:linear-gradient(90deg,#a267ff,#6c63ff);
+      box-shadow:0 6px 18px rgba(108,99,255,0.15);
+      cursor:pointer;
+    }
+
+    /* Main content */
+    .main{
+      flex:1; margin-left:260px; padding:28px; overflow:auto;
+    }
+
+    /* Navbar */
+    .navbar-top{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:12px 28px; background:#0B1739; border-bottom:1px solid rgba(255,255,255,0.05);
+      position:sticky; top:0; z-index:900;
+      border-radius: 10px;
+    }
+    .navbar-top h5{margin:0;color:#fff;font-weight:600;}
+    .user-menu{position:relative; display:flex; align-items:center;}
+    .user-trigger{display:flex; align-items:center; gap:8px; cursor:pointer;}
+    .user-trigger img{width:36px;height:36px;border-radius:50%;object-fit:cover;}
+    .user-trigger span{font-size:14px;color:#ccc;}
+    .dropdown-menu-custom{
+      position:absolute; top:100%; right:0; background:#081028; border-radius:8px; padding:8px 0; display:none; flex-direction:column; min-width:160px; z-index:999;
+    }
+    .user-menu.active .dropdown-menu-custom{display:flex;}
+    .dropdown-menu-custom a{padding:10px 14px; color:#ccc; font-size:14px; display:block;}
+    .dropdown-menu-custom a:hover{background:#0B1739;color:#fff;}
+
+    /* Profile Card */
+    .profile-container{
+      max-width:600px;
+      margin:60px auto;
+    }
+    .profile-card{
+      background: var(--panel);
+      border: 2px solid #6C63FF;
+      border-radius:12px;
+      box-shadow: 0 8px 25px rgba(108,99,255,0.4);
+      padding: 40px 30px;
+      text-align:center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .profile-card:hover{
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(108,99,255,0.5);
+      border-color:#4641B3;
+    }
+    .profile-img{
+      width:150px;
+      height:150px;
+      border-radius:50%;
+      object-fit:cover;
+      border:3px solid #6C63FF;
+      box-shadow:0 6px 18px rgba(0,0,0,0.3);
+      margin-bottom:20px;
+    }
+    .profile-name{
+      color:#fff;
+      font-weight:700;
+      font-size:26px;
+      margin-bottom:8px;
+    }
+    .profile-email, .profile-phone, .profile-role{
+      color: var(--muted);
+      margin:4px 0;
+      font-size:15px;
+    }
+    .edit-btn{
+      background: #6C63FF;
+      color:#fff;
+      border:none;
+      border-radius:8px;
+      padding:10px 22px;
+      font-weight:500;
+      margin-top:20px;
+      transition: background 0.3s ease;
+    }
+    .edit-btn:hover{
+      background:#4641B3;
+    }
+
+    /* Save Changes button */
+    .save-btn{
+      background:#6C63FF;
+      color:#fff;
+      transition: background 0.3s ease;
+    }
+    .save-btn:hover{
+      background:#4641B3;
+    }
+    h3 {
+      font-weight: 700;
+      color: #A4AEC1;
+    }
+    .card-dark {
+      background-color: #0F1A2A;
+      border: 2px solid #4641B3;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 8px 25px rgba(108,99,255,0.4);
+      transition: all 0.3s ease;
+    }
+    .card-dark:hover {
+      box-shadow: 0 12px 30px rgba(108,99,255,0.5);
+    }
+    .table thead th {
+      color: #6B64E1;
+    }
+    .btn-outline-danger:hover {
+      background-color: #DC3545;
+      color: #fff;
+    }
+    .modal-content {
+      background-color: #0F1A2A;
+      border: 2px solid #4641B3;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(108,99,255,0.4);
+      transition: all 0.3s ease;
+    }
+    .modal-content:hover {
+      box-shadow:  0 12px 30px rgba(108,99,255,0.5);
+    }
+    .form-control:focus {
+      border-color: #4641B3;
+      box-shadow: 0 8px 25px rgba(108,99,255,0.4);;
+    }
+    .btn-danger {
+      background-color: #0F1A2A;
+      border: none;
+    }
+    .btn-danger:hover {
+      background-color: #0F1A2A;
+    }
+.send-reply-btn {
+  background-color: #6C63FF;
+  color: #fff;
+  border: none;
+  transition: background 0.3s ease;
+}
+
+.send-reply-btn:hover {
+  background-color: #4641B3;
+}
+    /* Modal input focus effect */
+    .modal-content .form-control:focus, .modal-content .form-select:focus{
+      border-color: #6C63FF;
+      box-shadow:0 0 8px rgba(108,99,255,0.3);
+    }
+
+    .reply-textarea {
+  border: 2px solid #4641B3;
+  background-color: #0F1A2A; /* dark background */
+  color: #fff; /* text color */
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reply-textarea:focus {
+  border-color: #6C63FF;
+  box-shadow: 0 0 8px rgba(108,99,255,0.3);
+}
+.modal-header-custom {
+  border-bottom: 2px solid #6C63FF; /* border color changed */
+}
+    .card-dark {
+      background-color: #151a24;
+      border: 2px solid #6C63FF;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(108,99,255,0.2);
+      transition: 0.3s;
+    }
+
+    .card-dark:hover {
+      box-shadow: 0 0 25px rgba(108,99,255,0.4);
+    }
+
+    .btn-custom {
+      background-color: #6C63FF;
+      color: #fff;
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-custom:hover {
+      background-color: #4641B3;
+    }
+
+    .btn-update {
+      background-color: #ff9800;
+      color: #fff;
+      border: none;
+      transition: 0.3s;
+    }
+
+    .btn-update:hover {
+      background-color: #e68900;
+    }
+
+    .table-dark th {
+      background-color: #20232d;
+      color: #6C63FF;
+    }
+
+    .modal-content {
+      background-color: #151a24;
+      border: 2px solid #6C63FF;
+      border-radius: 10px;
+      color: #fff;
+    }
+
+    .form-control, .form-select {
+      background-color: #0F1A2A;
+      color: #fff;
+      border: 1px solid #4641B3;
+    }
+
+    .form-control:focus {
+      border-color: #6C63FF;
+      box-shadow: 0 0 6px rgba(108,99,255,0.3);
+    }
+
+    .modal-header {
+      border-bottom: 2px solid #6C63FF;
+    }
+
+    .table img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    /* Team Intro Card */
+    .team-intro-card {
+      background-color: #151a24;
+      border: 2px solid #6C63FF;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 0 15px rgba(108,99,255,0.2);
+    }
+
+    .team-intro-card h5 {
+      color: #6C63FF;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="assets/img/Screenshot_5.png" class="brand-logo" alt="Logo">
+      <h4>Magpie IT</h4>
+    </div>
+    <ul class="menu">
+       <li><a href="dashboard.html"><i class="bi bi-house-door"></i> Dashboard</a></li>
+      <li><a href="profile.html"><i class="bi bi-person"></i> Profile</a></li>
+      <li><a  class="active" href="#"><i class="bi bi-telephone"></i> message</a></li>
+      <li><a href="#"><i class="bi bi-people"></i> Team</a></li>
+      <li><a href="#"><i class="bi bi-folder"></i> Projects</a></li>
+      <li><a href="#"><i class="bi bi-check2-square"></i> Tasks</a></li>
+      <li><a href="#"><i class="bi bi-calendar"></i> Calendar</a></li>
+      <li><a href="#"><i class="bi bi-file-earmark"></i> Files</a></li>
+      <li><a href="#"><i class="bi bi-bar-chart"></i> Analytics</a></li>
+      <li><a href="#"><i class="bi bi-cash-stack"></i> Pricing</a></li>
+      <li><a href="#"><i class="bi bi-journal-text"></i> Blog</a></li>
+      <li><a href="chat.html"><i class="bi bi-chat-dots"></i> Live chat</a></li>
+
+      <li><a href="#"><i class="bi bi-gear"></i> Settings</a></li>
+    </ul>
+    <button class="cta-get">Logout</button>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+    <!-- Navbar -->
+    <nav class="navbar-top">
+      <h5>Dashboard Analytics</h5>
+      <div class="d-flex align-items-center gap-3">
+        <div class="user-menu">
+          <div class="user-trigger d-flex align-items-center gap-2">
+            <img src="assets/img/person/person-f-3.webp" alt="Profile">
+            <span>Mr. John <i class="bi bi-caret-down-fill"></i></span>
+          </div>
+          <div class="dropdown-menu-custom">
+            <a href="#"><i class="bi bi-person me-2"></i>Profile Settings</a>
+            <a href="#"><i class="bi bi-gear me-2"></i>Settings</a>
+            <a href="#"><i class="bi bi-box-arrow-right me-2"></i>Logout</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+ <div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h3 class="fw-bold text-light">Manage Portfolio</h3>
+      <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#addPortfolioModal">
+        <i class="bi bi-plus-circle"></i> Add Portfolio
+      </button>
+    </div>
+
+ 
+  <div class="row g-4">
+    <!-- Portfolio Card -->
+    <div class="col-md-4">
+      <div class="card portfolio-card p-3">
+        <img src="assets/img/portfolio/portfolio-12.webp" alt="Fintech App" class="portfolio-img img-fluid rounded">
+        
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <span class="text-light fw-semibold">Fintech</span>
+          <div class="rating text-warning">
+            <i class="bi bi-star-fill"></i> <span>4.8</span>
+          </div>
+        </div>
+
+        <div class="mt-2">
+          <h5 class="text-white fw-bold">Fintech Mobile Solution</h5>
+          <p class="text-light small mb-2">Cras ultricies ligula sed magna dictum porta. Proin eget tortor risus.</p>
+          <div class="badges">
+            <span class="badge bg-primary">Swift</span>
+            <span class="badge bg-info">Kotlin</span>
+            <span class="badge bg-success">Blockchain</span>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between mt-3">
+          <button class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
+          <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+    </div>
+  </div>
+ </div>
+
+   <!-- Add Portfolio Modal -->
+  <div class="modal fade" id="addPortfolioModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5>Add New Portfolio</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label>Project Title</label>
+                <input type="text" class="form-control" placeholder="Enter project title">
+              </div>
+              <div class="col-md-6">
+                <label>Category</label>
+                <input type="text" class="form-control" placeholder="e.g., Fintech, Web, App">
+              </div>
+              <div class="col-md-12">
+                <label>Description</label>
+                <textarea class="form-control" rows="3" placeholder="Short project description..."></textarea>
+              </div>
+              <div class="col-md-6">
+                <label>Project Image</label>
+                <input type="file" class="form-control">
+              </div>
+              <div class="col-md-6">
+                <label>Rating</label>
+                <input type="number" class="form-control" placeholder="e.g., 4.8" step="0.1">
+              </div>
+              <div class="col-md-6">
+                <label>Tech 1</label>
+                <input type="text" class="form-control" placeholder="e.g., Swift">
+              </div>
+              <div class="col-md-6">
+                <label>Tech 2</label>
+                <input type="text" class="form-control" placeholder="e.g., Kotlin">
+              </div>
+              <div class="col-md-6">
+                <label>Tech 3</label>
+                <input type="text" class="form-control" placeholder="e.g., Blockchain">
+              </div>
+              <div class="col-md-12">
+                <label>Project Link</label>
+                <input type="url" class="form-control" placeholder="https://example.com/project">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-custom px-4">Save Portfolio</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Portfolio Modal -->
+  <div class="modal fade" id="editModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5>Edit Portfolio</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label>Project Title</label>
+                <input type="text" class="form-control" value="Fintech Mobile Solution">
+              </div>
+              <div class="col-md-6">
+                <label>Category</label>
+                <input type="text" class="form-control" value="Fintech">
+              </div>
+              <div class="col-md-12">
+                <label>Description</label>
+                <textarea class="form-control" rows="3">Cras ultricies ligula sed magna dictum porta.</textarea>
+              </div>
+              <div class="col-md-6">
+                <label>Rating</label>
+                <input type="number" class="form-control" value="4.8" step="0.1">
+              </div>
+              <div class="col-md-6">
+                <label>Technologies</label>
+                <input type="text" class="form-control" value="Swift, Kotlin, Blockchain">
+              </div>
+              <div class="col-md-12">
+                <label>Project Link</label>
+                <input type="url" class="form-control" value="portfolio-details.html">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-custom px-4">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5>Confirm Delete</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body text-center">
+          <p>Are you sure you want to delete this project?</p>
+        </div>
+        <div class="modal-footer border-0 justify-content-center">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-custom">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h3 class="fw-bold text-light">Portfolio Details</h3>
+      <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#addPortfolioDetailsModal">
+        <i class="bi bi-plus-circle"></i> Add Portfolio details
+      </button>
+    </div>
+
+    <!-- Portfolio Table -->
+    <div class="card card-dark p-3">
+      <table class="table table-dark table-bordered text-center align-middle">
+        <thead>
+          <tr>
+            <th>Preview</th>
+            <th>Project Title</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Company name</th>
+            <th width="25%">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><img src="assets/img/portfolio/portfolio-12.webp" alt="Fintech App" width="60" class="rounded"></td>
+            <td>Fintech Mobile Solution</td>
+            <td>Fintech</td>
+            <td>05.11.2025</td>
+            <td>Aman IT Agency,Uttora-1230</td>
+            <td>
+              <button class="btn btn-sm btn-outline-warning" data-bs-toggle="modal" data-bs-target="#editDetailsModal"><i class="bi bi-pencil"></i> Edit</button>
+              <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteDetailsModal"><i class="bi bi-trash"></i> Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+
+<!-- Add Portfolio Modal -->
+<div class="modal fade" id="addPortfolioDetailsModal" tabindex="-1">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Add New Portfolio</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row g-3">
+            <!-- Portfolio Intro -->
+            <div class="col-md-6">
+              <label>Portfolio Intro Title</label>
+              <input type="text" class="form-control" placeholder="Enter intro title">
+            </div>
+            <div class="col-md-6">
+              <label>Portfolio Intro Description</label>
+              <input type="text" class="form-control" placeholder="Enter intro description">
+            </div>
+            <!-- Project Basic Info -->
+            <div class="col-md-6">
+              <label>Project Title</label>
+              <input type="text" class="form-control" placeholder="Enter project title">
+            </div>
+            <div class="col-md-6">
+              <label>Project Category</label>
+              <input type="text" class="form-control" placeholder="e.g., Fintech, Web, App">
+            </div>
+           <div class="col-md-12">
+  <label>Project Technology</label>
+  <div id="techWrapper">
+    <div class="input-group mb-2">
+      <input type="text" class="form-control" placeholder="e.g., Fintech, Web, App">
+      <button class="btn btn-outline-secondary addTechBtn" type="button">Add More</button>
+    </div>
+  </div>
+</div>
+            <div class="col-md-6">
+              <label>Date</label>
+              <input type="date" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label>Company Name</label>
+              <input type="text" class="form-control" placeholder="Enter company name">
+            </div>
+            <!-- Description & Link -->
+            <div class="col-md-12">
+              <label>Project Description</label>
+              <textarea class="form-control" rows="3" placeholder="Short project description..."></textarea>
+            </div>
+            <div class="col-md-6">
+              <label>Live Link</label>
+              <input type="url" class="form-control" placeholder="https://example.com/project">
+            </div>
+            <div class="col-md-6">
+              <label>GithubLink</label>
+              <input type="url" class="form-control" placeholder="https://github.com/project">
+            </div>
+            <div class="col-md-6">
+              <label>Main Project Image</label>
+              <input type="file" class="form-control">
+            </div>
+            <!-- Gallery Images -->
+            <div class="col-md-6">
+              <label>Gallery Images</label>
+              <div id="galleryWrapper">
+                <div class="input-group mb-2">
+                  <input type="file" class="form-control">
+                  <button class="btn btn-outline-secondary addGalleryBtn" type="button">Add More</button>
+                </div>
+              </div>
+            </div>
+            <!-- Detailed Sections -->
+            <div class="col-md-12">
+              <label>Project Overview</label>
+              <textarea class="form-control" rows="3" placeholder="Write project overview..."></textarea>
+            </div>
+            <div class="col-md-12">
+              <label>The Challenge</label>
+              <textarea class="form-control" rows="3" placeholder="Describe the challenge..."></textarea>
+            </div>
+            <div class="col-md-12">
+              <label>The Solution</label>
+              <textarea class="form-control" rows="3" placeholder="Describe the solution..."></textarea>
+            </div>
+            <!-- Key Features -->
+            <div class="col-md-12">
+              <label>Key Features</label>
+              <div id="featuresWrapper">
+                <div class="input-group mb-2">
+                  <input type="text" class="form-control" placeholder="Feature 1">
+                  <button class="btn btn-outline-secondary addFeatureBtn" type="button">Add More</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer border-0">
+        <button type="button" class="btn btn-custom px-4">Save Portfolio</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Portfolio Modal -->
+<div class="modal fade" id="editDetailsModal" tabindex="-1">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Edit Portfolio</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row g-3">
+            <!-- Portfolio Intro -->
+            <div class="col-md-6">
+              <label>Portfolio Intro Title</label>
+              <input type="text" class="form-control" value="Fintech Mobile Solution Intro">
+            </div>
+            <div class="col-md-6">
+              <label>Portfolio Intro Description</label>
+              <input type="text" class="form-control" value="Cras ultricies ligula sed magna dictum porta.">
+            </div>
+            <!-- Project Basic Info -->
+            <div class="col-md-6">
+              <label>Project Title</label>
+              <input type="text" class="form-control" value="Fintech Mobile Solution">
+            </div>
+            <div class="col-md-6">
+              <label>Project Category</label>
+              <input type="text" class="form-control" value="Fintech">
+            </div>
+            <div class="col-md-12">
+  <label>Project Technology</label>
+  <div id="editTechWrapper">
+    <div class="input-group mb-2 mt-2">
+      <input type="text" class="form-control" value="Swift">
+      <button class="btn btn-outline-secondary addEditTechBtn" type="button">Add More</button>
+    </div>
+    <div class="input-group mb-2">
+      <input type="text" class="form-control" value="Kotlin">
+      <button class="btn btn-outline-danger removeEditTechBtn" type="button">Remove</button>
+    </div>
+    <div class="input-group mb-2">
+      <input type="text" class="form-control" value="Blockchain">
+      <button class="btn btn-outline-danger removeEditTechBtn" type="button">Remove</button>
+    </div>
+  </div>
+</div>
+
+            <div class="col-md-6">
+              <label>Date</label>
+              <input type="date" class="form-control" value="2024-09-01">
+            </div>
+            <div class="col-md-6">
+              <label>Company Name</label>
+              <input type="text" class="form-control" value="DigitalCraft Solutions">
+            </div>
+            <!-- Description & Link -->
+            <div class="col-md-12">
+              <label>Project Description</label>
+              <textarea class="form-control" rows="3">Cras ultricies ligula sed magna dictum porta.</textarea>
+            </div>
+            <div class="col-md-6">
+              <label>Live Link</label>
+              <input type="url" class="form-control" value="https://projectwebsite.example.com">
+            </div>
+            <div class="col-md-6">
+              <label>Github Link</label>
+              <input type="url" class="form-control" value="https://github.com">
+            </div>
+            <div class="col-md-6">
+              <label>Main Project Image</label>
+              <input type="file" class="form-control">
+              <small class="text-white">Current: <a href="assets/img/portfolio/portfolio-12.webp" target="_blank">View Image</a></small>
+            </div>
+            <!-- Gallery Images -->
+            <div class="col-md-6">
+              <label>Gallery Images</label>
+              <div id="editGalleryWrapper">
+                <div class="input-group mb-2">
+                  <input type="file" class="form-control">
+                  <small class="text-white ms-2">Current: <a href="assets/img/portfolio/portfolio-4.webp" target="_blank">View</a></small>&nbsp;&nbsp;
+                  <button class="btn btn-outline-danger removeGalleryBtn" type="button">Remove</button>
+                </div>
+                <div class="input-group mb-2">
+                  <input type="file" class="form-control">
+                  <small class="text-white ms-2">Current: <a href="assets/img/portfolio/portfolio-6.webp" target="_blank">View</a></small>&nbsp;&nbsp;
+                  <button class="btn btn-outline-danger removeGalleryBtn" type="button">Remove</button>
+                </div>
+                <button class="btn btn-outline-secondary addGalleryBtn" type="button">Add More</button>
+              </div>
+            </div>
+            <!-- Detailed Sections -->
+            <div class="col-md-12">
+              <label>Project Overview</label>
+              <textarea class="form-control" rows="3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</textarea>
+            </div>
+            <div class="col-md-12">
+              <label>The Challenge</label>
+              <textarea class="form-control" rows="3">Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</textarea>
+            </div>
+            <div class="col-md-12">
+              <label>The Solution</label>
+              <textarea class="form-control" rows="3">Donec sollicitudin molestie malesuada. Curabitur arcu erat.</textarea>
+            </div>
+            <!-- Key Features -->
+            <div class="col-md-12">
+              <label>Key Features</label>
+              <div id="editFeaturesWrapper">
+                <div class="input-group mb-2">
+                  <input type="text" class="form-control" value="Real-time Data Visualization">
+                  <button class="btn btn-outline-danger removeFeatureBtn" type="button">Remove</button>
+                </div>
+                <div class="input-group mb-2">
+                  <input type="text" class="form-control" value="User Role Management">
+                  <button class="btn btn-outline-danger removeFeatureBtn" type="button">Remove</button>
+                </div>
+                <div class="input-group mb-2">
+                  <input type="text" class="form-control" value="Secure Authentication">
+                  <button class="btn btn-outline-danger removeFeatureBtn" type="button">Remove</button>
+                </div>
+                <button class="btn btn-outline-secondary addFeatureBtn" type="button">Add More</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer border-0">
+        <button type="button" class="btn btn-custom px-4">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteDetailsModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Confirm Delete</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p>Are you sure you want to delete this project?</p>
+      </div>
+      <div class="modal-footer border-0 justify-content-center">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-custom">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+      </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({duration:700, once:true});
+
+    // ===== User dropdown =====
+    const userMenu = document.querySelector('.user-menu');
+    const userTrigger = userMenu.querySelector('.user-trigger');
+    userTrigger.addEventListener('click', ()=>userMenu.classList.toggle('active'));
+    document.addEventListener('click', e => { if(!userMenu.contains(e.target)) userMenu.classList.remove('active'); });
+  </script>
+  <!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Features Add/Remove (Add Modal)
+  const featuresWrapper = document.getElementById("featuresWrapper");
+  featuresWrapper.addEventListener("click", function(e) {
+    if (e.target.classList.contains("addFeatureBtn")) {
+      e.preventDefault();
+      const div = document.createElement("div");
+      div.classList.add("input-group", "mb-2");
+      div.innerHTML = `<input type="text" class="form-control" placeholder="Feature"><button class="btn btn-outline-danger removeFeatureBtn" type="button">Remove</button>`;
+      featuresWrapper.appendChild(div);
+    }
+    if (e.target.classList.contains("removeFeatureBtn")) e.target.parentElement.remove();
+  });
+
+  // Gallery Add/Remove (Add Modal)
+  const galleryWrapper = document.getElementById("galleryWrapper");
+  galleryWrapper.addEventListener("click", function(e) {
+    if (e.target.classList.contains("addGalleryBtn")) {
+      e.preventDefault();
+      const div = document.createElement("div");
+      div.classList.add("input-group", "mb-2");
+      div.innerHTML = `<input type="file" class="form-control"><button class="btn btn-outline-danger removeGalleryBtn" type="button">Remove</button>`;
+      galleryWrapper.appendChild(div);
+    }
+    if (e.target.classList.contains("removeGalleryBtn")) e.target.parentElement.remove();
+  });
+
+  // Features Add/Remove (Edit Modal)
+  const editFeaturesWrapper = document.getElementById("editFeaturesWrapper");
+  editFeaturesWrapper.addEventListener("click", function(e) {
+    if (e.target.classList.contains("addFeatureBtn")) {
+      e.preventDefault();
+      const div = document.createElement("div");
+      div.classList.add("input-group", "mb-2");
+      div.innerHTML = `<input type="text" class="form-control" placeholder="Feature"><button class="btn btn-outline-danger removeFeatureBtn" type="button">Remove</button>`;
+      editFeaturesWrapper.insertBefore(div, e.target);
+    }
+    if (e.target.classList.contains("removeFeatureBtn")) e.target.parentElement.remove();
+  });
+
+  // Gallery Add/Remove (Edit Modal)
+  const editGalleryWrapper = document.getElementById("editGalleryWrapper");
+  editGalleryWrapper.addEventListener("click", function(e) {
+    if (e.target.classList.contains("addGalleryBtn")) {
+      e.preventDefault();
+      const div = document.createElement("div");
+      div.classList.add("input-group", "mb-2");
+      div.innerHTML = `<input type="file" class="form-control"><button class="btn btn-outline-danger removeGalleryBtn" type="button">Remove</button>`;
+      editGalleryWrapper.insertBefore(div, e.target);
+    }
+    if (e.target.classList.contains("removeGalleryBtn")) e.target.parentElement.remove();
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  const techWrapper = document.getElementById("techWrapper");
+
+  techWrapper.addEventListener("click", function(e) {
+    if(e.target.classList.contains("addTechBtn")) {
+      e.preventDefault();
+      const div = document.createElement("div");
+      div.classList.add("input-group", "mb-2");
+      div.innerHTML = `
+        <input type="text" class="form-control" placeholder="e.g., Fintech, Web, App">
+        <button class="btn btn-outline-danger removeTechBtn" type="button">Remove</button>
+      `;
+      techWrapper.appendChild(div);
+    }
+
+    if(e.target.classList.contains("removeTechBtn")) {
+      e.target.parentElement.remove();
+    }
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  const editTechWrapper = document.getElementById("editTechWrapper");
+
+  editTechWrapper.addEventListener("click", function(e) {
+    // Add new technology input
+    if(e.target.classList.contains("addEditTechBtn")) {
+      e.preventDefault();
+      const div = document.createElement("div");
+      div.classList.add("input-group", "mb-2");
+      div.innerHTML = `
+        <input type="text" class="form-control" placeholder="e.g., React, Node.js">
+        <button class="btn btn-outline-danger removeEditTechBtn" type="button">Remove</button>
+      `;
+      // নতুন div button-এর আগে add হবে
+      editTechWrapper.insertBefore(div, e.target.parentElement.nextSibling);
+    }
+
+    // Remove technology input
+    if(e.target.classList.contains("removeEditTechBtn")) {
+      e.target.parentElement.remove();
+    }
+  });
+});
+</script>
+</body>
+</html>

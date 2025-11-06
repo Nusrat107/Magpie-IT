@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashdark X — Demo Dashboard</title>
+
+  <!-- Fonts + Bootstrap + Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- AOS for scroll animations -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <style>
+        :root{
+      --bg:#0d1117;
+      --card:#161b22;
+      --accent:#6C63FF;
+      --text:#e6eef8;
+      --border:rgba(255,255,255,0.08);
+    }
+    body {
+      background-color: #05071E;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+    .file-container{
+      background-color: #151a24;
+      border: 2px solid #6C63FF;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(108,99,255,0.2);
+      transition: 0.3s;
+    }
+    .file-container:hover{
+     box-shadow: 0 0 25px rgba(108,99,255,0.4);
+    }
+    .file-card{
+      background:#111522;
+      border:1px solid var(--border);
+      border-radius:8px;
+      padding:10px;
+      transition:.3s;
+    }
+    .file-card:hover{
+      border-color:var(--accent);
+      transform:translateY(-3px);
+    }
+    .file-preview img{
+      width:100%;
+      border-radius:6px;
+      object-fit:cover;
+      height:120px;
+    }
+    .file-name{
+      font-weight:600;
+      font-size:14px;
+      margin-top:8px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .btn-accent{
+      background:var(--accent);
+      color:#fff;
+      border:none;
+    }
+    .btn-accent:hover{
+      background:#5952e4;
+    }
+
+
+ :root{
+      --bg:#0b1220;
+      --panel:#0f1a2a;
+      --muted:#a6b0c3;
+      --accent:#6c63ff;
+      --accent2:#4641B3;
+      --glass:rgba(255,255,255,0.03);
+    }
+
+    body{
+      margin:0;
+      font-family:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:#081028;
+      color:#e6eef8;
+      display:flex;
+      min-height:100vh;
+    }
+
+    a{text-decoration:none;color:inherit;}
+    .muted { color:var(--muted); font-size:13px; }
+
+    /* Sidebar */
+    .sidebar{
+      width:260px;
+      background-color:#081028;
+      border-right:1px solid rgba(255,255,255,0.03);
+      display:flex;
+      flex-direction:column;
+      padding:28px 20px;
+      gap:18px;
+      position:fixed;
+      top:0; left:0; bottom:0;
+      z-index:1000;
+    }
+    .brand{ display:flex; align-items:center; gap:10px; margin-bottom:20px; }
+    .brand-logo{ width:40px; height:40px; border-radius:50%; object-fit:cover; }
+    .brand h4{ margin:0; color:#fff; font-weight:700; }
+    .menu{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:6px; }
+    .menu a{
+      display:flex; align-items:center; gap:12px;
+      padding:10px 12px; border-radius:8px;
+      color:rgba(255,255,255,0.6); font-weight:500;
+    }
+    .menu a.active{
+      color:var(--accent);
+      background:linear-gradient(90deg, rgba(108,99,255,0.12), rgba(70,65,179,0.06));
+    }
+    .menu a:hover{ color:var(--accent); background:rgba(108,99,255,0.03); }
+    .cta-get{
+      margin-top:auto; padding:10px; font-weight:600;
+      border:none; border-radius:10px;
+      color:#fff; background:linear-gradient(90deg,#a267ff,#6c63ff);
+      box-shadow:0 6px 18px rgba(108,99,255,0.15);
+      cursor:pointer;
+    }
+
+    /* Main content */
+    .main{
+      flex:1; margin-left:260px; padding:28px; overflow:auto;
+    }
+
+    /* Navbar */
+    .navbar-top{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:12px 28px; background:#0B1739; border-bottom:1px solid rgba(255,255,255,0.05);
+      position:sticky; top:0; z-index:900;
+      border-radius: 10px;
+      
+    }
+    .navbar-top h5{margin:0;color:#fff;font-weight:600;}
+    .user-menu{position:relative; display:flex; align-items:center;}
+    .user-trigger{display:flex; align-items:center; gap:8px; cursor:pointer;}
+    .user-trigger img{width:36px;height:36px;border-radius:50%;object-fit:cover;}
+    .user-trigger span{font-size:14px;color:#ccc;}
+    .dropdown-menu-custom{
+      position:absolute; top:100%; right:0; background:#081028; border-radius:8px; padding:8px 0; display:none; flex-direction:column; min-width:160px; z-index:999;
+    }
+    .user-menu.active .dropdown-menu-custom{display:flex;}
+    .dropdown-menu-custom a{padding:10px 14px; color:#ccc; font-size:14px; display:block;}
+    .dropdown-menu-custom a:hover{background:#0B1739;color:#fff;}
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+  <div class="brand">
+    <img src="assets/img/Screenshot_5.png" class="brand-logo" alt="Logo">
+    <h4>Magpie IT</h4>
+  </div>
+  <ul class="menu">
+   <li><a class="active" href="dashboard.html"><i class="bi bi-house-door"></i> Dashboard</a></li>
+      <li><a href="profile.html"><i class="bi bi-person"></i> Profile</a></li>
+      <li><a href="message.html"><i class="bi bi-telephone"></i> message</a></li>
+      <li><a href="teams.html"><i class="bi bi-people"></i> Team</a></li>
+      <li><a href="project.html"><i class="bi bi-folder"></i> Projects</a></li>
+      <li><a href="services.html"><i class="bi bi-check2-square"></i> Service</a></li>
+      <li><a href="calender.html"><i class="bi bi-calendar"></i> Calendar</a></li>
+      <li><a href="file.html"><i class="bi bi-file-earmark"></i> Files</a></li>
+      <li><a href="#"><i class="bi bi-bar-chart"></i> Analytics</a></li>
+      <li><a href="price.html"><i class="bi bi-cash-stack"></i> Pricing</a></li>
+      <li><a href="#"><i class="bi bi-journal-text"></i> Blog</a></li>
+      <li><a href="chat.html"><i class="bi bi-chat-dots"></i> Live chat</a></li>
+      <li><a href="#"><i class="bi bi-gear"></i> Settings</a></li>
+  </ul>
+  <button class="cta-get">Logout</button>
+</aside>
+
+
+  <!-- Main -->
+  <main class="main">
+    <!-- Navbar -->
+    <nav class="navbar-top">
+      <h5>Dashboard Analytics</h5>
+      <div class="d-flex align-items-center gap-3">
+    
+        <div class="user-menu">
+          <div class="user-trigger d-flex align-items-center gap-2">
+            <img src="assets/img/Screenshot_5.png" alt="Profile">
+            <span>Mr. John <i class="bi bi-caret-down-fill"></i></span>
+          </div>
+          <div class="dropdown-menu-custom">
+            <a href="#"><i class="bi bi-person me-2"></i>Profile Settings</a>
+            <a href="#"><i class="bi bi-gear me-2"></i>Settings</a>
+            <a href="#"><i class="bi bi-box-arrow-right me-2"></i>Logout</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+
+ <div class="container">
+    <h3 class="mb-4 text-left mt-5" style="color:var(--accent); font-weight:700;"> File Manager</h3>
+
+    <div class="file-container mb-4">
+      <form id="uploadForm" class="d-flex align-items-center gap-2">
+        <input type="file" id="fileInput" class="form-control form-control-sm" required>
+        <button class="btn btn-accent btn-sm">Upload</button>
+      </form>
+    </div>
+
+    <div class="row g-3" id="fileList"></div>
+  </div>
+
+  <!-- View Modal -->
+<div class="modal fade" id="viewFileModal" tabindex="-1" aria-labelledby="viewFileLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background:#111522; color:white; border-radius:10px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewFileLabel">View File</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center" id="modalFileContent">
+        <!-- File preview/content will be injected here -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+       </main>
+       <script>
+  // Function to open modal and display file
+  function viewFile(file) {
+    const modalBody = document.getElementById("modalFileContent");
+    modalBody.innerHTML = ""; // Clear previous content
+
+    if(file.type === "image") {
+      modalBody.innerHTML = `<img src="${file.url}" alt="${file.name}" style="max-width:100%; border-radius:6px;">`;
+    } else {
+      modalBody.innerHTML = `<p style="word-break:break-word;">📄 ${file.name}</p>`;
+    }
+
+    const myModal = new bootstrap.Modal(document.getElementById('viewFileModal'));
+    myModal.show();
+  }
+</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({duration:700, once:true});
+
+    // ===== User dropdown =====
+    const userMenu = document.querySelector('.user-menu');
+    const userTrigger = userMenu.querySelector('.user-trigger');
+    userTrigger.addEventListener('click', ()=>userMenu.classList.toggle('active'));
+    document.addEventListener('click', e => { if(!userMenu.contains(e.target)) userMenu.classList.remove('active'); });
+  </script>
+  <script>
+    const fileList = document.getElementById("fileList");
+    const uploadForm = document.getElementById("uploadForm");
+    const fileInput = document.getElementById("fileInput");
+
+    let files = [
+      {name:"logo.png", type:"image", url:"https://via.placeholder.com/300x150"},
+      {name:"policy.pdf", type:"doc"},
+      {name:"banner.jpg", type:"image", url:"https://via.placeholder.com/350x200"},
+      {name:"report.xlsx", type:"doc"},
+      {name:"presentation.zip", type:"zip"},
+    ];
+
+    function renderFiles(){
+      fileList.innerHTML = "";
+      files.forEach((f,i)=>{
+        const col = document.createElement("div");
+        col.className = "col-md-3";
+        const card = document.createElement("div");
+        card.className = "file-card text-center";
+
+        const preview = document.createElement("div");
+        preview.className = "file-preview mb-2";
+
+        if(f.type === "image"){
+          preview.innerHTML = `<img src="${f.url}" alt="">`;
+        }else{
+          preview.innerHTML = `<div class="p-4 text-muted" style="font-size:40px;">📄</div>`;
+        }
+
+        const name = document.createElement("div");
+        name.className = "file-name";
+        name.textContent = f.name;
+
+        const actions = document.createElement("div");
+        actions.className = "d-flex justify-content-center gap-2 mt-2";
+        actions.innerHTML = `
+        <button class="btn btn-sm btn-outline-info" onclick='viewFile(files[${i}])'>👁️</button>
+          <button class="btn btn-sm btn-outline-light">⬇️</button>
+          <button class="btn btn-sm btn-outline-danger">🗑️</button>
+        `;
+
+        card.appendChild(preview);
+        card.appendChild(name);
+        card.appendChild(actions);
+        col.appendChild(card);
+        fileList.appendChild(col);
+      });
+    }
+
+    uploadForm.onsubmit = e=>{
+      e.preventDefault();
+      const file = fileInput.files[0];
+      if(!file) return;
+      const type = file.type.startsWith("image") ? "image" : "doc";
+      const url = type==="image" ? URL.createObjectURL(file) : "";
+      files.push({name:file.name, type, url});
+      fileInput.value="";
+      renderFiles();
+    }
+
+    renderFiles();
+  </script>
+</body>
+</html>
