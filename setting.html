@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Magpie IT — Dashboard & Profile</title>
+
+  <!-- Fonts + Bootstrap + Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- AOS for scroll animations -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <style>
+
+        :root {
+            --bg: #071026;
+            --panel: #0f1a2a;
+            --accent: #6C63FF;
+            --accent2: #4641B3;
+            --muted: #A8B1C4;
+            --card: #121428;
+            --card-border: rgba(108,99,255,0.18);
+        }
+
+        body {
+            background: linear-gradient(180deg,#05061a 0%, #071026 100%);
+            color: #e6eef8;
+            font-family: "Poppins", sans-serif;
+            padding: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .muted {
+            color: var(--muted);
+            
+        }
+
+        /* Sidebar */
+        .settings-sidebar1 {
+            width: 260px;
+            background: var(--panel);
+            border-radius: 10px;
+            padding: 20px;
+            height: 100%;
+                  border-color:#6C63FF !important ;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 0 15px rgba(108,99,255,0.2);
+        }
+
+        .settings-sidebar1 ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .settings-sidebar1 ul li a {
+            display: flex;
+            align-items: center;
+            color: var(--muted);
+            font-weight: 500;
+            text-decoration: none;
+            padding: 8px 10px;
+            border-radius: 6px;
+            margin-top: 10px;
+                 
+            transition: 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .settings-sidebar1 ul li a:hover,
+        .settings-sidebar1 ul li.active a {
+            background: var(--accent2);
+            color: #fff;
+            border: 1px solid var(--accent);
+            box-shadow: 0 0 8px rgba(108,99,255,0.3);
+        }
+
+        /* Main content wrapper */
+        .settings-content-wrapper {
+             border-color:#6C63FF !important ;
+            flex: 1;
+            background: var(--panel);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 0 20px rgba(108,99,255,0.25);
+        }
+
+        .settings-content {
+            background: var(--panel);
+            border-radius: 10px;
+            padding: 30px;
+            border-color:#6C63FF !important ;
+            border: 1px solid var(--card-border);
+            box-shadow: inset 0 0 10px rgba(108,99,255,0.1);
+        }
+
+        .page-title {
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--accent);
+        }
+
+        .form-control {
+    background: #0d1423;
+    border: 2px solid rgba(108,99,255,0.6); /* আগের তুলনায় ঘন করা হয়েছে */
+    color: #fff;
+    border-color:#6C63FF !important ;
+    border-radius: 6px;
+    box-shadow: inset 0 0 10px rgba(108,99,255,0.3); /* একটু বেশি inner shadow */
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 12px rgba(108,99,255,0.7);
+    outline: none;
+}
+        .btn-primary {
+            background-color: var(--accent);
+            border: 1px solid var(--accent2);
+            box-shadow: 0 4px 12px rgba(108,99,255,0.4);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent2);
+            box-shadow: 0 4px 12px rgba(108,99,255,0.6);
+        }
+
+        /* Layout */
+        .settings-page {
+            display: flex;
+            gap: 20px;
+        }
+
+        @media (max-width: 991px) {
+            .settings-page {
+                flex-direction: column;
+            }
+            .settings-sidebar1 {
+                width: 100%;
+            }
+        }
+    :root{
+      --bg:#0b1220;
+      --panel:#0f1a2a;
+      --muted:#a6b0c3;
+      --accent:#6C63FF;
+      --accent2:#4641B3;
+      --glass:rgba(255,255,255,0.03);
+    }
+
+    body{
+      margin:0;
+      font-family:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:#081028;
+      color:#e6eef8;
+      display:flex;
+      min-height:100vh;
+    }
+    a{text-decoration:none;color:inherit;}
+    .muted { color:var(--muted); font-size:13px; }
+
+    /* Sidebar */
+    .sidebar{
+      width:260px;
+      background-color:#081028;
+      border-right:1px solid rgba(255,255,255,0.03);
+      display:flex;
+      flex-direction:column;
+      padding:28px 20px;
+      gap:18px;
+      position:fixed;
+      top:0; left:0; bottom:0;
+      z-index:1000;
+    }
+    .brand{ display:flex; align-items:center; gap:10px; margin-bottom:20px; }
+    .brand-logo{ width:40px; height:40px; border-radius:50%; object-fit:cover; }
+    .brand h4{ margin:0; color:#fff; font-weight:700; }
+    .menu{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:6px; }
+    .menu a{
+      display:flex; align-items:center; gap:12px;
+      padding:10px 12px; border-radius:8px;
+      color:rgba(255,255,255,0.6); font-weight:500;
+    }
+    .menu a.active{
+      color:var(--accent);
+      background:linear-gradient(90deg, rgba(108,99,255,0.12), rgba(70,65,179,0.06));
+    }
+    .menu a:hover{ color:var(--accent); background:rgba(108,99,255,0.03); }
+    .cta-get{
+      margin-top:auto; padding:10px; font-weight:600;
+      border:none; border-radius:10px;
+      color:#fff; background:linear-gradient(90deg,#a267ff,#6c63ff);
+      box-shadow:0 6px 18px rgba(108,99,255,0.15);
+      cursor:pointer;
+    }
+
+    /* Main content */
+    .main{
+      flex:1; margin-left:260px; padding:28px; overflow:auto;
+    }
+
+    /* Navbar */
+    .navbar-top{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:12px 28px; background:#0B1739; border-bottom:1px solid rgba(255,255,255,0.05);
+      position:sticky; top:0; z-index:900;
+      border-radius: 10px;
+    }
+    .navbar-top h5{margin:0;color:#fff;font-weight:600;}
+    .user-menu{position:relative; display:flex; align-items:center;}
+    .user-trigger{display:flex; align-items:center; gap:8px; cursor:pointer;}
+    .user-trigger img{width:36px;height:36px;border-radius:50%;object-fit:cover;}
+    .user-trigger span{font-size:14px;color:#ccc;}
+    .dropdown-menu-custom{
+      position:absolute; top:100%; right:0; background:#081028; border-radius:8px; padding:8px 0; display:none; flex-direction:column; min-width:160px; z-index:999;
+    }
+    .user-menu.active .dropdown-menu-custom{display:flex;}
+    .dropdown-menu-custom a{padding:10px 14px; color:#ccc; font-size:14px; display:block;}
+    .dropdown-menu-custom a:hover{background:#0B1739;color:#fff;}
+
+.modal-header-custom {
+  border-bottom: 2px solid #6C63FF; /* border color changed */
+}
+    
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="assets/img/Screenshot_5.png" class="brand-logo" alt="Logo">
+      <h4>Magpie IT</h4>
+    </div>
+    <ul class="menu">
+     <li><a href="dashboard.html"><i class="bi bi-house-door"></i> Dashboard</a></li>
+      <li><a href="profile.html"><i class="bi bi-person"></i> Profile</a></li>
+      <li><a href="message.html"><i class="bi bi-telephone"></i> message</a></li>
+      <li><a href="teams.html"><i class="bi bi-people"></i> Team</a></li>
+      <li><a href="project.html"><i class="bi bi-folder"></i> Projects</a></li>
+      <li><a href="services.html"><i class="bi bi-check2-square"></i> Service</a></li>
+      <li><a href="calender.html"><i class="bi bi-calendar"></i> Calendar</a></li>
+      <li><a href="file.html"><i class="bi bi-file-earmark"></i> Files</a></li>
+      <li><a href="analytics.html"><i class="bi bi-bar-chart"></i> Analytics</a></li>
+      <li><a href="price.html"><i class="bi bi-cash-stack"></i> Pricing</a></li>
+      <li><a href="bloging.html"><i class="bi bi-journal-text"></i> Blog</a></li>
+      <li><a  href="chat.html"><i class="bi bi-chat-dots"></i> Live chat</a></li>
+      <li><a class="active"   href="setting.html"><i class="bi bi-gear"></i> Settings</a></li>
+    </ul>
+    <button class="cta-get">Logout</button>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+    <!-- Navbar -->
+    <nav class="navbar-top">
+      <h5>Setting</h5>
+      <div class="d-flex align-items-center gap-3">
+        <div class="user-menu">
+          <div class="user-trigger d-flex align-items-center gap-2">
+            <img src="assets/img/person/person-f-3.webp" alt="Profile">
+            <span>Mr. John <i class="bi bi-caret-down-fill"></i></span>
+          </div>
+          <div class="dropdown-menu-custom">
+            <a href="#"><i class="bi bi-person me-2"></i>Profile Settings</a>
+            <a href="#"><i class="bi bi-gear me-2"></i>Settings</a>
+            <a href="#"><i class="bi bi-box-arrow-right me-2"></i>Logout</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+
+
+
+<div class="container-fluid mt-5">
+    <div class="settings-page">
+
+      <!-- Sidebar -->
+<div class="settings-sidebar1">
+    <ul>
+        <li>
+            <a href="setting.html"><i class="fas fa-home me-2"></i> Back to Home</a>
+        </li>
+        <li class="menu-title mt-3 mb-2 muted">Settings</li>
+        <li class="active">
+            <a href="setting.html"><i class="fas fa-building me-2"></i> Company Settings</a>
+        </li>
+        <li><a href="location.html"><i class="fas fa-clock me-2"></i> Localization</a></li>
+        <li><a href="theme.html"><i class="fas fa-palette me-2"></i> Theme Settings</a></li>
+        <li><a href="password.html"><i class="fas fa-lock me-2"></i> Change Password</a></li>
+    </ul>
+</div>
+
+
+        <!-- Main Content Wrapper -->
+        <div class="settings-content-wrapper">
+            <div class="settings-content">
+                <h3 class="page-title">Company Settings</h3>
+
+                <form>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label>Company Name</label>
+                            <input class="form-control" type="text" placeholder="Company Name">
+                        </div>
+                        <div class="col-md-6">
+                            <label>Contact Person</label>
+                            <input class="form-control" type="text" placeholder="Contact Person">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Address</label>
+                        <input class="form-control" type="text" placeholder="Address">
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label>Country</label>
+                            <input class="form-control" type="text" placeholder="Country">
+                        </div>
+                        <div class="col-md-3">
+                            <label>City</label>
+                            <input class="form-control" type="text" placeholder="City">
+                        </div>
+                        <div class="col-md-3">
+                            <label>State</label>
+                            <input class="form-control" type="text" placeholder="State">
+                        </div>
+                        <div class="col-md-3">
+                            <label>Postal Code</label>
+                            <input class="form-control" type="text" placeholder="Postal Code">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label>Email</label>
+                            <input class="form-control" type="email" placeholder="Email">
+                        </div>
+                        <div class="col-md-6">
+                            <label>Phone</label>
+                            <input class="form-control" type="text" placeholder="Phone">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label>Mobile</label>
+                            <input class="form-control" type="text" placeholder="Mobile">
+                        </div>
+                        <div class="col-md-6">
+                            <label>Fax</label>
+                            <input class="form-control" type="text" placeholder="Fax">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Website URL</label>
+                        <input class="form-control" type="text" placeholder="Website URL">
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+    
+      </main>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- FontAwesome -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({duration:700, once:true});
+
+    // ===== User dropdown =====
+    const userMenu = document.querySelector('.user-menu');
+    const userTrigger = userMenu.querySelector('.user-trigger');
+    userTrigger.addEventListener('click', ()=>userMenu.classList.toggle('active'));
+    document.addEventListener('click', e => { if(!userMenu.contains(e.target)) userMenu.classList.remove('active'); });
+  </script>
+</body>
+</html>

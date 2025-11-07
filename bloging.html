@@ -561,17 +561,17 @@
       <h4>Magpie IT</h4>
     </div>
     <ul class="menu">
-       <li><a href="dashboard.html"><i class="bi bi-house-door"></i> Dashboard</a></li>
+      <li><a href="dashboard.html"><i class="bi bi-house-door"></i> Dashboard</a></li>
       <li><a href="profile.html"><i class="bi bi-person"></i> Profile</a></li>
       <li><a href="message.html"><i class="bi bi-telephone"></i> message</a></li>
       <li><a href="teams.html"><i class="bi bi-people"></i> Team</a></li>
-      <li><a class="active" href="project.html"><i class="bi bi-folder"></i> Projects</a></li>
+      <li><a href="project.html"><i class="bi bi-folder"></i> Projects</a></li>
       <li><a href="services.html"><i class="bi bi-check2-square"></i> Service</a></li>
       <li><a href="calender.html"><i class="bi bi-calendar"></i> Calendar</a></li>
       <li><a href="file.html"><i class="bi bi-file-earmark"></i> Files</a></li>
       <li><a href="analytics.html"><i class="bi bi-bar-chart"></i> Analytics</a></li>
       <li><a href="price.html"><i class="bi bi-cash-stack"></i> Pricing</a></li>
-      <li><a href="bloging.html"><i class="bi bi-journal-text"></i> Blog</a></li>
+      <li><a class="active"  href="bloging.html"><i class="bi bi-journal-text"></i> Blog</a></li>
       <li><a href="chat.html"><i class="bi bi-chat-dots"></i> Live chat</a></li>
       <li><a href="setting.html"><i class="bi bi-gear"></i> Settings</a></li>
     </ul>
@@ -582,7 +582,7 @@
   <main class="main">
     <!-- Navbar -->
     <nav class="navbar-top">
-      <h5>Project</h5>
+      <h5>Blog</h5>
       <div class="d-flex align-items-center gap-3">
         <div class="user-menu">
           <div class="user-trigger d-flex align-items-center gap-2">
@@ -600,9 +600,9 @@
 
  <div class="container-fluid py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-      <h3 class="fw-bold text-light">Manage Portfolio</h3>
+      <h3 class="fw-bold text-light">Manage Blog</h3>
       <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#addPortfolioModal">
-        <i class="bi bi-plus-circle"></i> Add Portfolio
+        <i class="bi bi-plus-circle"></i> Add Blog
       </button>
     </div>
 
@@ -614,26 +614,29 @@
         <img src="assets/img/portfolio/portfolio-12.webp" alt="Fintech App" class="portfolio-img img-fluid rounded">
         
         <div class="d-flex justify-content-between align-items-center mt-3">
-          <span class="text-light fw-semibold">Fintech</span>
+ 
           <div class="rating text-warning">
-            <i class="bi bi-star-fill"></i> <span>4.8</span>
+
+            <span>2025</span>
           </div>
-        </div>
+ 
+          </div>
+        
+
 
         <div class="mt-2">
-          <h5 class="text-white fw-bold">Fintech Mobile Solution</h5>
-          <p class="text-light small mb-2">Cras ultricies ligula sed magna dictum porta. Proin eget tortor risus.</p>
+            <h5 class="text-white fw-bold">Fintech Mobile Solution</h5>
           <div class="badges">
             <span class="badge bg-primary">Swift</span>
             <span class="badge bg-info">Kotlin</span>
-            <span class="badge bg-success">Blockchain</span>
           </div>
-        </div>
-
-        <div class="d-flex justify-content-between mt-3">
+          <div class="d-flex justify-content-between mt-3">
           <button class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
           <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
         </div>
+        </div>
+
+        
       </div>
     </div>
   </div>
@@ -659,22 +662,13 @@
                 <label>Project Title</label>
                 <input type="text" class="form-control" placeholder="Enter project title">
               </div>
-              <div class="col-md-6">
-                <label>Category</label>
-                <input type="text" class="form-control" placeholder="e.g., Fintech, Web, App">
-              </div>
-              <div class="col-md-12">
-                <label>Description</label>
-                <textarea class="form-control" rows="3" placeholder="Short project description..."></textarea>
-              </div>
+        
+             
               <div class="col-md-6">
                 <label>Project Image</label>
                 <input type="file" class="form-control">
               </div>
-              <div class="col-md-6">
-                <label>Rating</label>
-                <input type="number" class="form-control" placeholder="e.g., 4.8" step="0.1">
-              </div>
+              
               <div class="col-md-6">
                 <label>Tech 1</label>
                 <input type="text" class="form-control" placeholder="e.g., Swift">
@@ -686,6 +680,10 @@
               <div class="col-md-6">
                 <label>Tech 3</label>
                 <input type="text" class="form-control" placeholder="e.g., Blockchain">
+              </div>
+              <div class="col-md-6">
+                <label>Year</label>
+                <input type="text" class="form-control" placeholder="Year">
               </div>
               <div class="col-md-12">
                 <label>Project Link</label>
@@ -717,20 +715,17 @@
                 <input type="text" class="form-control" value="Fintech Mobile Solution">
               </div>
               <div class="col-md-6">
-                <label>Category</label>
-                <input type="text" class="form-control" value="Fintech">
-              </div>
-              <div class="col-md-12">
-                <label>Description</label>
-                <textarea class="form-control" rows="3">Cras ultricies ligula sed magna dictum porta.</textarea>
-              </div>
-              <div class="col-md-6">
-                <label>Rating</label>
-                <input type="number" class="form-control" value="4.8" step="0.1">
-              </div>
+                <label>Project Image</label>
+                <input type="file" class="form-control" value="">
+              </div>            
+             
               <div class="col-md-6">
                 <label>Technologies</label>
                 <input type="text" class="form-control" value="Swift, Kotlin, Blockchain">
+              </div>
+              <div class="col-md-6">
+                <label>Year</label>
+                <input type="text" class="form-control" value="2025">
               </div>
               <div class="col-md-12">
                 <label>Project Link</label>
@@ -768,9 +763,9 @@
     
 <div class="container-fluid py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-      <h3 class="fw-bold text-light">Portfolio Details</h3>
+      <h3 class="fw-bold text-light">Blog Details</h3>
       <button class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#addPortfolioDetailsModal">
-        <i class="bi bi-plus-circle"></i> Add Portfolio details
+        <i class="bi bi-plus-circle"></i> Add Blog details
       </button>
     </div>
 
@@ -783,7 +778,7 @@
             <th>Project Title</th>
             <th>Category</th>
             <th>Date</th>
-            <th>Company name</th>
+            <th>Published By</th>
             <th width="25%">Action</th>
           </tr>
         </thead>
@@ -817,11 +812,11 @@
           <div class="row g-3">
             <!-- Portfolio Intro -->
             <div class="col-md-6">
-              <label>Portfolio Intro Title</label>
+              <label>Blog Intro Title</label>
               <input type="text" class="form-control" placeholder="Enter intro title">
             </div>
             <div class="col-md-6">
-              <label>Portfolio Intro Description</label>
+              <label>Blog Intro Description</label>
               <input type="text" class="form-control" placeholder="Enter intro description">
             </div>
             <!-- Project Basic Info -->
@@ -847,7 +842,7 @@
               <input type="date" class="form-control">
             </div>
             <div class="col-md-6">
-              <label>Company Name</label>
+              <label>Published By</label>
               <input type="text" class="form-control" placeholder="Enter company name">
             </div>
             <!-- Description & Link -->
@@ -855,43 +850,15 @@
               <label>Project Description</label>
               <textarea class="form-control" rows="3" placeholder="Short project description..."></textarea>
             </div>
-            <div class="col-md-6">
-              <label>Live Link</label>
-              <input type="url" class="form-control" placeholder="https://example.com/project">
-            </div>
-            <div class="col-md-6">
-              <label>GithubLink</label>
-              <input type="url" class="form-control" placeholder="https://github.com/project">
-            </div>
+           
+           
             <div class="col-md-6">
               <label>Main Project Image</label>
               <input type="file" class="form-control">
-            </div>
-            <!-- Gallery Images -->
-            <div class="col-md-6">
-              <label>Gallery Images</label>
-              <div id="galleryWrapper">
-                <div class="input-group mb-2">
-                  <input type="file" class="form-control">
-                  <button class="btn btn-outline-secondary addGalleryBtn" type="button">Add More</button>
-                </div>
-              </div>
-            </div>
-            <!-- Detailed Sections -->
-            <div class="col-md-12">
-              <label>Project Overview</label>
-              <textarea class="form-control" rows="3" placeholder="Write project overview..."></textarea>
-            </div>
-            <div class="col-md-12">
-              <label>The Challenge</label>
-              <textarea class="form-control" rows="3" placeholder="Describe the challenge..."></textarea>
-            </div>
-            <div class="col-md-12">
-              <label>The Solution</label>
-              <textarea class="form-control" rows="3" placeholder="Describe the solution..."></textarea>
-            </div>
+            </div>            
+           
             <!-- Key Features -->
-            <div class="col-md-12">
+            <div class="col-md-6">
               <label>Key Features</label>
               <div id="featuresWrapper">
                 <div class="input-group mb-2">
@@ -899,6 +866,10 @@
                   <button class="btn btn-outline-secondary addFeatureBtn" type="button">Add More</button>
                 </div>
               </div>
+            </div>
+             <div class="col-md-12">
+              <label>Key Description</label>
+              <textarea class="form-control" rows="3" placeholder="Short project description..."></textarea>
             </div>
           </div>
         </form>
@@ -915,7 +886,7 @@
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h5>Edit Portfolio</h5>
+        <h5>Edit Blog</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
@@ -923,11 +894,11 @@
           <div class="row g-3">
             <!-- Portfolio Intro -->
             <div class="col-md-6">
-              <label>Portfolio Intro Title</label>
+              <label>Blog Intro Title</label>
               <input type="text" class="form-control" value="Fintech Mobile Solution Intro">
             </div>
             <div class="col-md-6">
-              <label>Portfolio Intro Description</label>
+              <label>Blog Intro Description</label>
               <input type="text" class="form-control" value="Cras ultricies ligula sed magna dictum porta.">
             </div>
             <!-- Project Basic Info -->
@@ -962,59 +933,20 @@
               <input type="date" class="form-control" value="2024-09-01">
             </div>
             <div class="col-md-6">
-              <label>Company Name</label>
+              <label>Published By</label>
               <input type="text" class="form-control" value="DigitalCraft Solutions">
             </div>
             <!-- Description & Link -->
             <div class="col-md-12">
               <label>Project Description</label>
               <textarea class="form-control" rows="3">Cras ultricies ligula sed magna dictum porta.</textarea>
-            </div>
-            <div class="col-md-6">
-              <label>Live Link</label>
-              <input type="url" class="form-control" value="https://projectwebsite.example.com">
-            </div>
-            <div class="col-md-6">
-              <label>Github Link</label>
-              <input type="url" class="form-control" value="https://github.com">
-            </div>
-            <div class="col-md-6">
+            </div>  
+                     <div class="col-md-6">
               <label>Main Project Image</label>
               <input type="file" class="form-control">
-              <small class="text-white">Current: <a href="assets/img/portfolio/portfolio-12.webp" target="_blank">View Image</a></small>
-            </div>
-            <!-- Gallery Images -->
-            <div class="col-md-6">
-              <label>Gallery Images</label>
-              <div id="editGalleryWrapper">
-                <div class="input-group mb-2">
-                  <input type="file" class="form-control">
-                  <small class="text-white ms-2">Current: <a href="assets/img/portfolio/portfolio-4.webp" target="_blank">View</a></small>&nbsp;&nbsp;
-                  <button class="btn btn-outline-danger removeGalleryBtn" type="button">Remove</button>
-                </div>
-                <div class="input-group mb-2">
-                  <input type="file" class="form-control">
-                  <small class="text-white ms-2">Current: <a href="assets/img/portfolio/portfolio-6.webp" target="_blank">View</a></small>&nbsp;&nbsp;
-                  <button class="btn btn-outline-danger removeGalleryBtn" type="button">Remove</button>
-                </div>
-                <button class="btn btn-outline-secondary addGalleryBtn" type="button">Add More</button>
-              </div>
-            </div>
-            <!-- Detailed Sections -->
-            <div class="col-md-12">
-              <label>Project Overview</label>
-              <textarea class="form-control" rows="3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</textarea>
-            </div>
-            <div class="col-md-12">
-              <label>The Challenge</label>
-              <textarea class="form-control" rows="3">Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</textarea>
-            </div>
-            <div class="col-md-12">
-              <label>The Solution</label>
-              <textarea class="form-control" rows="3">Donec sollicitudin molestie malesuada. Curabitur arcu erat.</textarea>
             </div>
             <!-- Key Features -->
-            <div class="col-md-12">
+            <div class="col-md-6">
               <label>Key Features</label>
               <div id="editFeaturesWrapper">
                 <div class="input-group mb-2">
@@ -1032,6 +964,11 @@
                 <button class="btn btn-outline-secondary addFeatureBtn" type="button">Add More</button>
               </div>
             </div>
+<div class="col-md-12">
+              <label>Key Description</label>
+              <textarea class="form-control" rows="3">Cras ultricies ligula sed magna dictum porta.</textarea>
+            </div>   
+
           </div>
         </form>
       </div>
@@ -1108,7 +1045,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (e.target.classList.contains("removeGalleryBtn")) e.target.parentElement.remove();
   });
 
-  // Features Add/Remove (Edit Modal)
+ // Features Add/Remove (Edit Modal)
   const editFeaturesWrapper = document.getElementById("editFeaturesWrapper");
   editFeaturesWrapper.addEventListener("click", function(e) {
     if (e.target.classList.contains("addFeatureBtn")) {
@@ -1120,6 +1057,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     if (e.target.classList.contains("removeFeatureBtn")) e.target.parentElement.remove();
   });
+ 
 
   // Gallery Add/Remove (Edit Modal)
   const editGalleryWrapper = document.getElementById("editGalleryWrapper");
@@ -1176,6 +1114,27 @@ document.addEventListener("DOMContentLoaded", function() {
     // Remove technology input
     if(e.target.classList.contains("removeEditTechBtn")) {
       e.target.parentElement.remove();
+    }
+  });
+});
+document.addEventListener('DOMContentLoaded', function () {
+  const featureWrapper = document.getElementById('editFeaturesWrapper');
+
+  // Add More button click
+  featureWrapper.addEventListener('click', function (e) {
+    if (e.target.classList.contains('addFeatureBtn')) {
+      const newInputGroup = document.createElement('div');
+      newInputGroup.classList.add('input-group', 'mb-2');
+      newInputGroup.innerHTML = `
+        <input type="text" class="form-control" placeholder="Enter new feature">
+        <button class="btn btn-outline-danger removeFeatureBtn" type="button">Remove</button>
+      `;
+      featureWrapper.insertBefore(newInputGroup, e.target); // Add before "Add More" button
+    }
+
+    // Remove button click
+    if (e.target.classList.contains('removeFeatureBtn')) {
+      e.target.closest('.input-group').remove();
     }
   });
 });
