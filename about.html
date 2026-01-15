@@ -36,6 +36,7 @@
   ======================================================== -->
 
   <style>
+    
     body {
       background-color: #05071E;
       color: #222;
@@ -156,6 +157,44 @@
       right: 15px;
       z-index: 9999;
     }
+
+@media (max-width: 768px) {
+
+  /* Translator normal top */
+  #google_translate_element {
+    position: relative;
+    margin-left: 15px;
+    width: 100%;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  /* Navbar sticky */
+  header.header {
+    position: sticky;
+    top: 30px;
+    z-index: 999;
+  }
+}
+
+
+/* ===== 💻 Desktop Version ===== */
+@media (min-width: 769px) {
+  /* Translator right side positioning */
+  #google_translate_element {
+    position: absolute;
+    top: 20px;        /* navbar height adjust */
+    right: 30px;      /* right padding adjust */
+    width: auto;
+    margin: 0;
+  }
+
+  /* Header must be relative for translator positioning */
+  header.header {
+    position: relative;
+    z-index: 1000;
+  }
+}
 
     .footer a {
   color: #6c63ff;
